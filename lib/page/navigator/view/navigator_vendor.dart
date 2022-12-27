@@ -2,6 +2,7 @@ import 'package:belajar_bloc_arsitectur/bloc/cubit/activator_cubit.dart';
 import 'package:belajar_bloc_arsitectur/bloc/cubit/theme_cubit.dart';
 import 'package:belajar_bloc_arsitectur/page/cart/view/cart_page.dart';
 import 'package:belajar_bloc_arsitectur/page/home_vendor/view/home_vendor.dart';
+import 'package:belajar_bloc_arsitectur/page/testing_widget/view/testing_widget_panel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
@@ -192,8 +193,10 @@ class _NavigatorStateVendor extends State<NavigatorVendor> {
                     ),
                   ),
                 ),
-                Flexible(
-                  fit: FlexFit.tight,
+                SizedBox(
+                  width: (selected != 0)
+                      ? MediaQuery.of(context).size.width * 0.95
+                      : MediaQuery.of(context).size.width * 0.75,
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.blue[200],
@@ -203,13 +206,20 @@ class _NavigatorStateVendor extends State<NavigatorVendor> {
                       children: [
                         const HomeVendorPage(),
                         const CartPage(),
-                        Container(
-                          color: Colors.purple[100],
-                        ),
+                        ExpansionPanelDemo(),
                         const CartPage()
                       ],
                     ),
                   ),
+                ),
+                Visibility(
+                  visible: (selected == 0) ? true : false,
+                  child: Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      decoration: BoxDecoration(
+                        color: Colors.blue[200],
+                      ),
+                      child: const CartPage()),
                 ),
               ],
             ),
